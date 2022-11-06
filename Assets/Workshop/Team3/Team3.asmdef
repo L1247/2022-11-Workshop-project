@@ -1,3 +1,16 @@
 {
-	"name": "Team3"
+    "name": "Team3",
+    "rootNamespace": "",
+    "references": [
+        "UnityHFSM"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
