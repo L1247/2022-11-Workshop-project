@@ -34,11 +34,21 @@ public class Enemy : MonoBehaviour
 class Chase : State<NPCState>
 {
     private GameObject owner;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+
     private float speed = 1;
 
     public Chase(GameObject _Owner) : base()
     {
         owner = _Owner;
+        animator = owner.GetComponent<Animator>();
+        spriteRenderer = owner.GetComponent<SpriteRenderer>();
+    }
+
+    public override void OnEnter()
+    {
+        animator.SetBool("isWalk", true);
     }
 
     public override void OnLogic()
@@ -50,6 +60,7 @@ class Chase : State<NPCState>
     {
         var dir = (_Target.position - owner.transform.position).normalized;
         owner.transform.Translate(dir * speed * Time.deltaTime);
+        spriteRenderer.flipX = dir.x < 0;
     }
 }
 
