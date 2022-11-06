@@ -1,28 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using FSM;
-using JetBrains.Annotations;
-using UnityEngine;
 using Workshop.Team2;
 
-enum NPCState
+public enum NPCState
 {
     Chase,
-    Death
 }
 
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
-    // Start is called before the first frame update
-
+    public float _Speed = 1;
+    public float Speed { get; set; }
     private StateMachine<NPCState> fsm;
-    public bool isAlive = true;
 
     void Start()
     {
+        Speed = _Speed;
         fsm = new StateMachine<NPCState>();
-        fsm.AddState(NPCState.Chase, new Chase(gameObject));
-        fsm.AddState(NPCState.Death, new Death(gameObject));
+        fsm.AddState(NPCState.Chase, new Chase(this,Player.instance));
         fsm.SetStartState(NPCState.Chase);
         fsm.Init();
     }
@@ -32,59 +26,6 @@ public class Enemy : MonoBehaviour
     {
         fsm.OnLogic();
     }
+
+   
 }
-
-class Chase : State<NPCState>
-{
-    private GameObject owner;
-    private Animator animator;
-    private SpriteRenderer spriteRenderer;
-
-    private float speed = 1;
-
-    public Chase(GameObject _Owner) : base()
-    {
-        owner = _Owner;
-        animator = owner.GetComponent<Animator>();
-        spriteRenderer = owner.GetComponent<SpriteRenderer>();
-    }
-
-    public override void OnEnter()
-    {
-        animator.SetBool("isWalk", true);
-    }
-
-    public override void OnLogic()
-    {
-        MoveTo(Player.instance.transform);
-    }
-
-    private void MoveTo(Transform _Target)
-    {
-        var dir = (_Target.position - owner.transform.position).normalized;
-        owner.transform.Translate(dir * speed * Time.deltaTime);
-        spriteRenderer.flipX = dir.x < 0;
-    }
-}
-
-class Death : State<NPCState> 
-{
-    private GameObject owner;
-    private Animator animator;
-    private SpriteRenderer spriteRenderer;
-
-    private float speed = 1;
-
-    public Death(GameObject _Owner) : base()
-    {
-        owner = _Owner;
-        animator = owner.GetComponent<Animator>();
-        spriteRenderer = owner.GetComponent<SpriteRenderer>();
-    }
-    public override void OnEnter() 
-    {
-        
-    }
-}
-
-

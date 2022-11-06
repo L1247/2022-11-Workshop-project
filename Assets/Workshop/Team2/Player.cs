@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Workshop.Team2
 {
-    public class Player : MonoBehaviour
+    public class Player : Character
     {
         public static Player instance;
 
