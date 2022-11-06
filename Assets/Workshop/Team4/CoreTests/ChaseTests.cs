@@ -1,5 +1,6 @@
 ﻿#region
 
+using System.Runtime.Remoting;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -7,12 +8,13 @@ using UnityEngine;
 
 public class ChaseTests
 {
-#region Test Methods
+    #region Test Methods
 
     [Test]
-    public void ChaseTarget()
-    {
-        var self = new GameObject("Self");
+    public void ChaseTarget() {
+        var self = new GameObject("Self") {
+            transform = { position = new Vector3(0, 0, 0) }
+        };
         var player = new GameObject
         {
             tag       = "Player",
@@ -27,10 +29,9 @@ public class ChaseTests
 
         chasing.OnEnter();
         chasing.OnLogic();
-        
-        var distance = Vector3.Distance(self.transform.position, player.transform.position);
-        Assert.IsTrue(distance < 1f);
+
+        Assert.AreEqual(self.transform.position.x, player.transform.position.x);
     }
 
-#endregion
+    #endregion
 }

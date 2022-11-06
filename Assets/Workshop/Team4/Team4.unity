@@ -143,6 +143,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 134334077}
   _animator: {fileID: 134334076}
   _health: 1
+  _moveSpeed: 1
 --- !u!95 &134334076 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8877264217911536238, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
@@ -174,7 +175,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8877264217911536240, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8877264217911536240, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
       propertyPath: m_LocalPosition.z
@@ -234,6 +235,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 150154262}
   _animator: {fileID: 150154261}
   _health: 1
+  _moveSpeed: 1
 --- !u!95 &150154261 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8877264217911536238, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
@@ -265,7 +267,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8877264217911536240, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8877264217911536240, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
       propertyPath: m_LocalPosition.z
@@ -325,6 +327,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 361884539}
   _animator: {fileID: 361884538}
   _health: 1
+  _moveSpeed: 1
 --- !u!95 &361884538 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8877264217911536238, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
@@ -356,7 +359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8877264217911536240, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8877264217911536240, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
       propertyPath: m_LocalPosition.z
@@ -409,11 +412,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1368761136176495883, guid: 7382d41c5f4cc2a45b1f3c85e1e1b55b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.39
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1368761136176495883, guid: 7382d41c5f4cc2a45b1f3c85e1e1b55b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1368761136176495883, guid: 7382d41c5f4cc2a45b1f3c85e1e1b55b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -474,7 +477,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8877264217911536240, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8877264217911536240, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
       propertyPath: m_LocalPosition.z
@@ -534,6 +537,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 937101923}
   _animator: {fileID: 937101922}
   _health: 1
+  _moveSpeed: 1
 --- !u!95 &937101922 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8877264217911536238, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
@@ -564,6 +568,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 983037747}
   _animator: {fileID: 983037746}
   _health: 1
+  _moveSpeed: 1
 --- !u!95 &983037746 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8877264217911536238, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
@@ -595,7 +600,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8877264217911536240, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8877264217911536240, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
       propertyPath: m_LocalPosition.z
@@ -656,7 +661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8877264217911536240, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8877264217911536240, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
       propertyPath: m_LocalPosition.z
@@ -717,7 +722,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8877264217911536240, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8877264217911536240, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
       propertyPath: m_LocalPosition.z
@@ -777,6 +782,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 1588854890}
   _animator: {fileID: 1588854889}
   _health: 1
+  _moveSpeed: 1
 --- !u!95 &1588854889 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8877264217911536238, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
@@ -892,7 +898,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8877264217911536240, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8877264217911536240, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
       propertyPath: m_LocalPosition.z
@@ -952,6 +958,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 1764461891}
   _animator: {fileID: 1764461890}
   _health: 1
+  _moveSpeed: 1
 --- !u!95 &1764461890 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8877264217911536238, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
@@ -982,6 +989,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 1957203578}
   _animator: {fileID: 1957203577}
   _health: 1
+  _moveSpeed: 1
 --- !u!95 &1957203577 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8877264217911536238, guid: d73d87cff2af6344cb0e5d87d0d914da, type: 3}
