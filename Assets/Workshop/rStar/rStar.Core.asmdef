@@ -1,7 +1,9 @@
 {
   "name": "rStar.Core",
   "rootNamespace": "",
-  "references": [],
+  "references": [
+    "UnityHFSM"
+  ],
   "includePlatforms": [],
   "excludePlatforms": [],
   "allowUnsafeCode": false,
