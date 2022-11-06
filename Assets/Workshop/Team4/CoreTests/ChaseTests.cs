@@ -19,8 +19,11 @@ public class ChaseTests
             transform = { position = new Vector3(1, 0, 0) }
         };
 
+        var timer = new FakeTimer();
+        timer.DeltTime = 1;
+        
         var moster  = self.AddComponent<Monster>();
-        var chasing = new Chase(moster);
+        var chasing = new Chase(moster, timer);
 
         chasing.OnEnter();
         chasing.OnLogic();

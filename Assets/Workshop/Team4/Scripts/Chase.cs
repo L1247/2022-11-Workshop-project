@@ -4,13 +4,22 @@ using UnityEngine;
 public class Chase : State<Monster.State>
 {
     static readonly int IsWalkHash = Animator.StringToHash("isWalk");
-    Monster             _self;
-    Transform           _player;
-    Vector3             _orientation;
+    Monster _self;
+    Transform _player;
+    Vector3 _orientation;
+    private ITimer _selfTimer;
 
-    public Chase(Monster self) => _self = self;
 
-    public override void OnEnter()
+    public Chase(Monster self, ITimer timer)
+    {
+        _self = self;
+        _selfTimer = timer;
+
+
+
+    }
+
+public override void OnEnter()
     {
         base.OnEnter();
         if (_self.Animator != null)
@@ -41,7 +50,7 @@ public class Chase : State<Monster.State>
 
     void MoveToPlayer(Vector3 front)
     {
-        var time = _self.MoveSpeed * Time.deltaTime;
+        var time = _self.MoveSpeed * _selfTimer.GetDeltaTime();
         _self.transform.position += front * time;
         Debug.Log($"time :{time}");
     }
