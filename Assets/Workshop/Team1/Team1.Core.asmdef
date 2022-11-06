@@ -1,0 +1,16 @@
+{
+    "name": "Team1.Core",
+    "rootNamespace": "",
+    "references": [
+        "UnityHFSM"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
