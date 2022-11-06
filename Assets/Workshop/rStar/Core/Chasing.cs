@@ -5,7 +5,7 @@ using UnityEngine;
 
 #endregion
 
-class Chasing : State<string>
+public class Chasing : State<string>
 {
 #region Private Variables
 
