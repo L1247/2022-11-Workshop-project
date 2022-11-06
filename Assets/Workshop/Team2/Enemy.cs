@@ -8,7 +8,6 @@ public enum NPCState
 
 public class Enemy : Character
 {
-    public float Speed = 1;
     private StateMachine<NPCState> fsm;
 
     void Start()
