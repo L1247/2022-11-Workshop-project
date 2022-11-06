@@ -8,8 +8,8 @@ public class EnemyStateMachine : MonoBehaviour{
 
 	private void Start(){
 		_stateMachine = new StateMachine<EnemyState>();
-		_stateMachine.AddState(EnemyState.Chasing, new Chasing(transform, target));
-		_stateMachine.SetStartState(EnemyState.Chasing);
+		_stateMachine.AddState(EnemyState.Chase, new Chase(transform, target));
+		_stateMachine.SetStartState(EnemyState.Chase);
 		_stateMachine.Init();
 	}
 
@@ -18,11 +18,11 @@ public class EnemyStateMachine : MonoBehaviour{
 	}
 }
 
-public class Chasing : State<EnemyState>{
+public class Chase : State<EnemyState>{
 	public Transform Origin{ get; }
 	public Transform Target{ get; }
 
-	public Chasing(Transform origin, Transform target){
+	public Chase(Transform origin, Transform target){
 		Origin = origin;
 		Target = target;
 	}
@@ -32,7 +32,10 @@ public class Chasing : State<EnemyState>{
 		Debug.Log($"Chasing");
 	}
 
-	public override void OnLogic(){ }
+	public override void OnLogic()
+	{
+		ChasingTarget();
+	}
 
 	private void ChasingTarget(){
 		Origin.position = Vector3.Lerp(Origin.position, Target.position, Time.deltaTime);
@@ -40,5 +43,5 @@ public class Chasing : State<EnemyState>{
 }
 
 public enum EnemyState{
-	Chasing
+	Chase
 }
