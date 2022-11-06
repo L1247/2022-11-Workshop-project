@@ -1,0 +1,5 @@
+{
+  "name": "Team4",
+  "references": ["UnityHFSM"],
+  "autoReferenced": false
+}
