@@ -8,6 +8,7 @@ using Workshop.Team2;
 enum NPCState
 {
     Chase,
+    Death
 }
 
 public class Enemy : MonoBehaviour
@@ -15,11 +16,13 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
 
     private StateMachine<NPCState> fsm;
+    public bool isAlive = true;
 
     void Start()
     {
         fsm = new StateMachine<NPCState>();
         fsm.AddState(NPCState.Chase, new Chase(gameObject));
+        fsm.AddState(NPCState.Death, new Death(gameObject));
         fsm.SetStartState(NPCState.Chase);
         fsm.Init();
     }
@@ -61,6 +64,26 @@ class Chase : State<NPCState>
         var dir = (_Target.position - owner.transform.position).normalized;
         owner.transform.Translate(dir * speed * Time.deltaTime);
         spriteRenderer.flipX = dir.x < 0;
+    }
+}
+
+class Death : State<NPCState> 
+{
+    private GameObject owner;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+
+    private float speed = 1;
+
+    public Death(GameObject _Owner) : base()
+    {
+        owner = _Owner;
+        animator = owner.GetComponent<Animator>();
+        spriteRenderer = owner.GetComponent<SpriteRenderer>();
+    }
+    public override void OnEnter() 
+    {
+        
     }
 }
 
