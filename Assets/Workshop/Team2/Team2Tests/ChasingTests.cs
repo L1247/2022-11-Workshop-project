@@ -9,14 +9,14 @@ public class ChasingTests
     [Test]
     public void ChasingToTarget()
     {
-        var timeSec = 1;
+        var timeSec = 3;
         var fps = 60;
         var frame = timeSec * fps;
         
         var self = new GameObject("Self", typeof(Character));
         var target = new GameObject("Target");
         
-        self.transform.position = new Vector3(3 , 2 , 0);
+        self.transform.position = new Vector3(8 , 7 , 0);
         float originDistance = (target.transform.position - self.transform.position).magnitude;
         
         var chasing = new Chase(self.GetComponent<Character>(), target);
@@ -28,8 +28,8 @@ public class ChasingTests
         
         float distanceAfterMove = (target.transform.position - self.transform.position).magnitude;
         Debug.Log($"Origin Dis: {originDistance} | AfterMove Dis: {distanceAfterMove}");
-        Assert.Greater(originDistance , 0); // 原始距離 > 0
-        Assert.Less(distanceAfterMove , originDistance); // 1秒後 移動後距離 < 原始距離
+        Assert.Greater(originDistance , 0); // [前提] 原始距離 > 0
+        Assert.Less(distanceAfterMove , originDistance); // [驗證] 3秒後 移動後距離 < 原始距離
     }
 
 }
