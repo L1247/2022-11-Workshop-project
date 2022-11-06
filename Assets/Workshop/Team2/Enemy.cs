@@ -8,13 +8,11 @@ public enum NPCState
 
 public class Enemy : Character
 {
-    public float _Speed = 1;
-    public float Speed { get; set; }
+    public float Speed = 1;
     private StateMachine<NPCState> fsm;
 
     void Start()
     {
-        Speed = _Speed;
         fsm = new StateMachine<NPCState>();
         fsm.AddState(NPCState.Chase, new Chase(this,Player.instance));
         fsm.SetStartState(NPCState.Chase);

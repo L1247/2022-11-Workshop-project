@@ -25,13 +25,13 @@ public class Chase : State<NPCState>
     public override void OnLogic()
     {
         // MoveTo(target.transform, Time.deltaTime);
-        MoveTo(target.transform);
+        MoveTo(target.transform, Time.deltaTime);
     }
 
-    public void MoveTo(Transform _Target)
+    public void MoveTo(Transform _Target, float tick)
     {
         var dir = (_Target.position - owner.transform.position).normalized;
-        owner.transform.Translate(dir * owner.Speed * 0.1f);
+        owner.transform.Translate(dir * owner.Speed * tick);
         if (spriteRenderer != null)
         {
             spriteRenderer.flipX = dir.x < 0;
