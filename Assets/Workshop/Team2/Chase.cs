@@ -30,11 +30,15 @@ public class Chase : State<NPCState>
 
     public void MoveTo(Transform _Target, float tick)
     {
-        var dir = (_Target.position - owner.transform.position).normalized;
-        owner.transform.Translate(dir * owner.Speed * tick);
-        if (spriteRenderer != null)
+        if (Vector3.Distance(owner.transform.position , _Target.transform.position) > 0)
         {
-            spriteRenderer.flipX = dir.x < 0;
+            var dir = (_Target.position - owner.transform.position).normalized;
+            owner.transform.position += dir * owner.Speed * tick;
+            // owner.transform.Translate(dir * owner.Speed * tick);
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.flipX = dir.x < 0;
+            }
         }
     }
 }
