@@ -281,6 +281,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7170564ff1e8f4f96dd6412486938d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsDeath: 0
+  IsPlayerAlive: 0
+  render: {fileID: 6850146504970297696}
+--- !u!212 &6850146504970297696 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3926059939375359245, guid: e7ca6fcafb9cf134d8a5e0e3a2fa1d48, type: 3}
+  m_PrefabInstance: {fileID: 7596641582812447822}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7596641582812447822
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -332,6 +340,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3926059939375359250, guid: e7ca6fcafb9cf134d8a5e0e3a2fa1d48, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: d7aac77dc3dd58a4089f74b5c8a3727d, type: 2}
     - target: {fileID: 3926059939375359251, guid: e7ca6fcafb9cf134d8a5e0e3a2fa1d48, type: 3}
       propertyPath: m_Name
       value: Monster

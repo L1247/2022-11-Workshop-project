@@ -13,12 +13,19 @@ namespace Workshop.Team3
             Chase,
         }
 
-        private StateMachine<MonsterState> fsm;
+        public bool IsDeath;
+        public bool IsPlayerAlive;
+
+        private                  StateMachine<MonsterState> fsm;
+        private                  Animator                   anim;
+        [SerializeField] private SpriteRenderer             render;
 
         void Start()
         {
+            anim = GetComponent<Animator>();
+
             fsm = new StateMachine<MonsterState>();
-            fsm.AddState(MonsterState.Chase, new Chase(transform));
+            fsm.AddState(MonsterState.Chase, new Chase(this));
             fsm.SetStartState(MonsterState.Chase);
             fsm.Init();
         }
@@ -27,5 +34,12 @@ namespace Workshop.Team3
         {
             fsm.OnLogic();
         }
+
+        public void SetPosition(Vector3 moveDelta) => transform.localPosition += moveDelta;
+        public Vector3 GetPosition() => transform.localPosition;
+
+        public void SetFlip(bool IsFlip) => render.flipX = IsFlip; 
+        
+        public void SetAnimBool(string animName, bool IsOn) => anim.SetBool(animName, IsOn);
     }
 }

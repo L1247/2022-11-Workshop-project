@@ -6,38 +6,53 @@ namespace Workshop.Team3
 {
     public class Chase :State<MonsterStateMachine.MonsterState>
     {
-        private Transform myTrans_;
-        private GameObject player_;
-        private SpriteRenderer spriteRenderer_;
+        private MonsterStateMachine monsterStateMachine;
         
-        public Chase(Transform myTrans)
+        private GameObject     player_;
+
+        public Chase(MonsterStateMachine monsterStateMachine)
         {
-            myTrans_ = myTrans;
+            this.monsterStateMachine = monsterStateMachine;
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
+            
             Debug.Log("Chase");
-            player_ = GameObject.FindGameObjectWithTag("Player");
-            spriteRenderer_ = myTrans_.GetComponent<SpriteRenderer>();
+
+            if (player_ == null)
+                player_ = GameObject.FindGameObjectWithTag("Player");
+
+            monsterStateMachine.SetAnimBool("IsChase", true);
         }
 
         public override void OnLogic()
         {
             base.OnLogic();
+
+            if (player_ == null)
+            {
+                Debug.Log("cannot find player");
+                return;
+            }
+            
             Move(player_.transform.position);
             Flip(player_.transform.position);
         }
 
         private void Move(Vector3 destination)
         {
-            myTrans_.position += (destination - myTrans_.position).normalized * 1 * Time.deltaTime;
+            var moveDelta = (destination - monsterStateMachine.GetPosition()).normalized * 1 * Time.deltaTime;
+            
+            monsterStateMachine.SetPosition(moveDelta);
         }
         
         private void Flip(Vector3 destination)
         {
-            spriteRenderer_.flipX = (destination.x - myTrans_.position.x) < 0;
+            var IsFlip = (destination.x - monsterStateMachine.GetPosition().x) < 0;
+            
+            monsterStateMachine.SetFlip(IsFlip);
         }
     }
 }
