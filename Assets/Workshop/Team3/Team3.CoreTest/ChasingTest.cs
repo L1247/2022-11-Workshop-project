@@ -8,14 +8,12 @@ public class ChasingTest
     MonsterStateMachine stateMachine;
     Transform selfTrans;
     Transform targetTrans;
-    ITime itime;
     [SetUp]
     public void SetUp()
     {
         selfTrans = new GameObject().transform;
         targetTrans = new GameObject().transform;
         stateMachine = selfTrans.gameObject.AddComponent<MonsterStateMachine>();
-        itime = new TestTime();
     }
 
     [Test]
@@ -23,9 +21,10 @@ public class ChasingTest
     {
         selfTrans.position = new Vector3(100, 0, 0);
         targetTrans.position = new Vector3(0, 0, 0);
-        var chase = new Chase(stateMachine, itime);
-        itime.getDeltaTime().Returns<float>(1);
-        chase.Move(targetTrans.position, itime);
+        var time = Substitute.For<ITime>();
+        time.getDeltaTime().Returns(1);
+        var chase = new Chase(stateMachine, time);
+        chase.Move(targetTrans.position, time);
         Assert.Less(Vector3.Distance(selfTrans.position, targetTrans.position),100);
     }
 }
