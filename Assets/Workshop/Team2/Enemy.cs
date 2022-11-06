@@ -13,7 +13,7 @@ public class Enemy : Character
     void Start()
     {
         fsm = new StateMachine<NPCState>();
-        fsm.AddState(NPCState.Chase, new Chase(this,Player.instance));
+        fsm.AddState(NPCState.Chase, new Chase(this, Player.instance.gameObject));
         fsm.SetStartState(NPCState.Chase);
         fsm.Init();
     }
