@@ -2,41 +2,46 @@ using System;
 using FSM;
 using UnityEngine;
 
-public class EnemyStateMachine : MonoBehaviour{
-	private StateMachine<EnemyState>            _stateMachine;
-	public  Transform                           target;
-	public  Animator                            animator;
+public class EnemyStateMachine : MonoBehaviour
+{
+    private StateMachine<EnemyState> _stateMachine;
+    public Transform target;
+    public Animator animator;
+    public float moveSpeed = 1;
 
-	private void Start(){
-		_stateMachine = new StateMachine<EnemyState>();
-		_stateMachine.AddState(EnemyState.Chase, new Chase(transform, target));
-		_stateMachine.AddState(EnemyState.Death, new Death(animator));
-		_stateMachine.SetStartState(EnemyState.Chase);
-		_stateMachine.Init();
-	}
+    private void Start()
+    {
+        _stateMachine = new StateMachine<EnemyState>();
+        _stateMachine.AddState(EnemyState.Chase, new Chase(transform, target, moveSpeed));
+        _stateMachine.AddState(EnemyState.Death, new Death(animator));
+        _stateMachine.SetStartState(EnemyState.Chase);
+        _stateMachine.Init();
+    }
 
-	private void Update(){
-		_stateMachine.OnLogic();
-	}
+    private void Update()
+    {
+        _stateMachine.OnLogic();
+    }
 }
 
 internal class Death : State<EnemyState>
 {
-	private readonly Animator animator;
+    private readonly Animator animator;
 
-	public Death(Animator animator)
-	{
-		this.animator = animator;
-	}
+    public Death(Animator animator)
+    {
+        this.animator = animator;
+    }
 
 
-	public override void OnEnter()
-	{
-		animator.Play("Death");
-	}
+    public override void OnEnter()
+    {
+        animator.Play("Death");
+    }
 }
 
-public enum EnemyState{
-	Chase,
-	Death
+public enum EnemyState
+{
+    Chase,
+    Death
 }
