@@ -1,0 +1,21 @@
+{
+    "name": "Team3.CoreTest",
+    "rootNamespace": "",
+    "references": [
+        "GUID:22035b3a01377c244afe3e71a8f652cd",
+        "GUID:810f54f43f696374fb3b49d45b461274"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "NSubstitute.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -9,10 +9,12 @@ namespace Workshop.Team3
         private MonsterStateMachine monsterStateMachine;
         
         private GameObject     player_;
+        private ITime time;
 
-        public Chase(MonsterStateMachine monsterStateMachine)
+        public Chase(MonsterStateMachine monsterStateMachine, ITime iTime)
         {
             this.monsterStateMachine = monsterStateMachine;
+            time = iTime;
         }
 
         public override void OnEnter()
@@ -37,13 +39,13 @@ namespace Workshop.Team3
                 return;
             }
             
-            Move(player_.transform.position);
+            Move(player_.transform.position,time);
             Flip(player_.transform.position);
         }
 
-        private void Move(Vector3 destination)
+        public void Move(Vector3 destination, ITime iTime)
         {
-            var moveDelta = (destination - monsterStateMachine.GetPosition()).normalized * 1 * Time.deltaTime;
+            var moveDelta = (destination - monsterStateMachine.GetPosition()).normalized * 1 * iTime.getDeltaTime();
             
             monsterStateMachine.SetPosition(moveDelta);
         }

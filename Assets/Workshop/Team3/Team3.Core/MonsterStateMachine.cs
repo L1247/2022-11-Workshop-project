@@ -25,7 +25,7 @@ namespace Workshop.Team3
             anim = GetComponent<Animator>();
 
             fsm = new StateMachine<MonsterState>();
-            fsm.AddState(MonsterState.Chase, new Chase(this));
+            fsm.AddState(MonsterState.Chase, new Chase(this, new TestTime()));
             fsm.SetStartState(MonsterState.Chase);
             fsm.Init();
         }
