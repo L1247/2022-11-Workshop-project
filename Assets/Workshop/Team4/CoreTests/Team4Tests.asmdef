@@ -1,0 +1,25 @@
+{
+    "name": "Team4Tests",
+    "rootNamespace": "Team4Tests",
+    "references": [
+        "Team4",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "UnityHFSM"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

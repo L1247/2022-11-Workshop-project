@@ -2,7 +2,7 @@ using System;
 using FSM;
 using UnityEngine;
 
-sealed class Monster : MonoBehaviour {
+public class Monster : MonoBehaviour {
     public enum State {
         Chase,
         Death,
@@ -19,13 +19,18 @@ sealed class Monster : MonoBehaviour {
     [SerializeField] Animator _animator;
 
     [SerializeField] float _health = 1;
-
+    [SerializeField] float _moveSpeed = 1;
 
     StateMachine<State> _fsm;
 
+    public Animator       Animator        => _animator;
+    public SpriteRenderer SpriteRenderer => _spriteRenderer;
+
+    public float MoveSpeed => _moveSpeed;
+
     void Start() {
         _fsm = new StateMachine<State>();
-        _fsm.AddState(State.Chase, new Chase(transform, _spriteRenderer, _animator, 1f));
+        _fsm.AddState(State.Chase, new Chase(this));
         _fsm.AddState(State.Death, new Death(gameObject));
         _fsm.AddTransition(new Transition<State>(State.Chase, State.Death, _ => !IsAlive()));
         _fsm.SetStartState(State.Chase);

@@ -1,35 +1,48 @@
 using FSM;
 using UnityEngine;
 
-sealed class Chase : State<Monster.State> {
-    Transform _self;
-    SpriteRenderer _spriteRenderer;
-    Animator _animator;
-    float _speed;
+public class Chase : State<Monster.State>
+{
+    static readonly int IsWalkHash = Animator.StringToHash("isWalk");
+    Monster             _self;
+    Transform           _player;
+    Vector3             _orientation;
 
-    Transform _player;
+    public Chase(Monster self) => _self = self;
 
-    public Chase(Transform self, SpriteRenderer spriteRenderer, Animator animator, float speed) {
-        _self = self;
-        _spriteRenderer = spriteRenderer;
-        _animator = animator;
-        _speed = speed;
-    }
-
-    public override void OnEnter() {
+    public override void OnEnter()
+    {
         base.OnEnter();
-        _animator.Play("Walk");
+        if (_self.Animator != null)
+            _self.Animator.SetBool(IsWalkHash, true);
         _player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    public override void OnLogic() {
+    public override void OnLogic()
+    {
         base.OnLogic();
-        FaceToPlayer();
-        MoveToPlayer();
+        var start = _self.transform.position;
+        var end   = _player.position;
+        FaceToPlayer(start, end);
+        MoveToPlayer((end - start).normalized);
     }
 
-     void FaceToPlayer() => _spriteRenderer.flipX = _self.position.x > _player.position.x;
+    public override void OnExit()
+    {
+        base.OnExit();
+        _self.Animator.SetBool(IsWalkHash, false);
+    }
 
-    void MoveToPlayer() =>
-        _self.position = Vector3.Lerp(_self.position, _player.position, _speed * Time.deltaTime);
+    void FaceToPlayer(Vector3 start, Vector3 end)
+    {
+        if (_self.SpriteRenderer != null)
+            _self.SpriteRenderer.flipX = start.x > end.x;
+    }
+
+    void MoveToPlayer(Vector3 front)
+    {
+        var time = _self.MoveSpeed * Time.deltaTime;
+        _self.transform.position += front * time;
+        Debug.Log($"time :{time}");
+    }
 }
