@@ -3,13 +3,15 @@ using FSM;
 using UnityEngine;
 
 public class EnemyStateMachine : MonoBehaviour{
-	private StateMachine<EnemyState> _stateMachine;
-	public Transform target;
+	private StateMachine<EnemyState>            _stateMachine;
+	public  Transform                           target;
+	public  Animator                            animator;
 
 	private void Start(){
 		_stateMachine = new StateMachine<EnemyState>();
-		_stateMachine.AddState(EnemyState.Chasing, new Chasing(transform, target));
-		_stateMachine.SetStartState(EnemyState.Chasing);
+		_stateMachine.AddState(EnemyState.Chase, new Chase(transform, target));
+		_stateMachine.AddState(EnemyState.Death, new Death(animator));
+		_stateMachine.SetStartState(EnemyState.Chase);
 		_stateMachine.Init();
 	}
 
@@ -18,27 +20,23 @@ public class EnemyStateMachine : MonoBehaviour{
 	}
 }
 
-public class Chasing : State<EnemyState>{
-	public Transform Origin{ get; }
-	public Transform Target{ get; }
+internal class Death : State<EnemyState>
+{
+	private readonly Animator animator;
 
-	public Chasing(Transform origin, Transform target){
-		Origin = origin;
-		Target = target;
+	public Death(Animator animator)
+	{
+		this.animator = animator;
 	}
 
-	public override void OnEnter(){
-		//play animation 
-		Debug.Log($"Chasing");
-	}
 
-	public override void OnLogic(){ }
-
-	private void ChasingTarget(){
-		Origin.position = Vector3.Lerp(Origin.position, Target.position, Time.deltaTime);
+	public override void OnEnter()
+	{
+		animator.Play("Death");
 	}
 }
 
 public enum EnemyState{
-	Chasing
+	Chase,
+	Death
 }
