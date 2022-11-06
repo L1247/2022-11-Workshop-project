@@ -49,7 +49,7 @@ class Chase : State<NPCState>
     private void MoveTo(Transform _Target)
     {
         var dir = (_Target.position - owner.transform.position).normalized;
-        owner.transform.Translate(dir * speed);
+        owner.transform.Translate(dir * speed * Time.deltaTime);
     }
 }
 
