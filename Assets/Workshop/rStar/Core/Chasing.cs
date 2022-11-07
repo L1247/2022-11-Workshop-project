@@ -39,7 +39,7 @@ public class Chasing : State<string>
     public override void OnLogic()
     {
         var moveDirection = (target.position - self.position).normalized;
-        var movement      = moveDirection * Time.deltaTime * moveSpeed;
+        var movement      = moveDirection * /*Time.deltaTime*/ 1 * moveSpeed;
         self.position += movement;
     }
 
