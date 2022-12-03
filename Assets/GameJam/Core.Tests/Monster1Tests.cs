@@ -24,7 +24,7 @@ public class Monster1Tests
 
     [Test(Description = "怪物面向")]
     [TestCase(Facing.Right , 1)]
-    [TestCase(Facing.Left ,  -1)]
+    [TestCase(Facing.Left , -1)]
     public void Monster_Facing(Facing facing , float expectedScaleX)
     {
         var monster1 = Given_A_Monster1();
