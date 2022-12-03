@@ -1,0 +1,19 @@
+{
+  "name": "GameJam.CoreTests",
+  "rootNamespace": "",
+  "references": [
+    "GUID:016bbb99b1c2b184798540a0693731ab",
+    "GUID:810f54f43f696374fb3b49d45b461274"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
