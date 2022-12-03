@@ -40,6 +40,9 @@ public class Chasing : State<string>
 
     public override void OnLogic()
     {
+        var noTarget = target == null;
+        if (noTarget) return;
+
         var targetPosition     = target.position;
         var selfPosition       = self.GetPos();
         var dir                = (targetPosition - selfPosition).normalized;
