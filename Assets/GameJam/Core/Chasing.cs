@@ -5,7 +5,7 @@ using UnityEngine;
 
 #endregion
 
-internal class Chasing : State<string>
+public class Chasing : State<string>
 {
 #region Private Variables
 
@@ -46,7 +46,7 @@ internal class Chasing : State<string>
         var distanceWithTarget = Vector2.Distance(targetPosition , selfPosition);
         var needStop           = distanceWithTarget <= stopDistance;
         if (needStop) return;
-        self.Translate(dir * moveSpeed * Time.deltaTime);
+        self.Translate(dir * moveSpeed * /*Time.deltaTime*/1);
         var facingRight = dir.x > 0;
         self.localScale = facingRight ? rightVector : leftVector;
     }
