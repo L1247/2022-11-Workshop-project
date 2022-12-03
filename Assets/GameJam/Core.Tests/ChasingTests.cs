@@ -11,12 +11,13 @@ public class ChasingTests
 #region Test Methods
 
     [Test]
-    [TestCase(1.42f , 1.42f , 0.71f , 0.71f , Facing.Left , Facing.Right,
-              Description = "右")]
-    [TestCase(-1.42f , -1.42f , -0.71f , -0.71f , Facing.Right, Facing.Left ,
-              Description = "左")]
+    [TestCase(                              -1.42f , -1.42f , -0.71f , -0.71f , Facing.Right ,
+                             Facing.Left ,  Description = "左")]
+    [TestCase(                              1.42f , 1.42f , 0.71f , 0.71f , Facing.Left ,
+                             Facing.Right , Description = "右")]
     [Category("Moving")]
-    public void _01_MoveTowardsTarget(float targetPosX , float targetPosY , float frame1X , float frame1Y , Facing defaultFacing, Facing expectedFacing)
+    public void _01_MoveTowardsTarget(float  targetPosX , float targetPosY , float frame1X , float frame1Y , Facing defaultFacing ,
+                                      Facing expectedFacing)
     {
         var self = Given_A_Monster1_With_Pos(Given_Pos(0 , 0));
         Given_A_Facing(self , defaultFacing);
@@ -33,10 +34,10 @@ public class ChasingTests
     }
 
     [Test]
-    [TestCase(1 , 1 , 0.99f , 0.99f , Facing.Right ,
-              Description = "右")]
     [TestCase(-1 , -1 , -0.99f , -0.99f , Facing.Left ,
               Description = "左")]
+    [TestCase(1 , 1 , 0.99f , 0.99f , Facing.Right ,
+              Description = "右")]
     [Category("Moving")]
     public void _02_StopMoving(float targetPosX , float targetPosY , float selfPosX , float selfPosY , Facing facing)
     {
