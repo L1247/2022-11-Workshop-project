@@ -25,9 +25,9 @@ internal class Chasing : State<string>
 
     public override void OnLogic()
     {
-        var _Dir = (target.position - self.position).normalized;
-        self.Translate(_Dir * moveSpeed * Time.deltaTime);
-        self.localScale = _Dir.x > 0 ? new Vector3(1, 1, 1) : new Vector3(-1, 1, 1);
+        var dir = (target.position - self.position).normalized;
+        self.Translate(dir * moveSpeed * Time.deltaTime);
+        self.localScale = dir.x > 0 ? new Vector3(1, 1, 1) : new Vector3(-1, 1, 1);
     }
 
     #endregion
