@@ -32,7 +32,7 @@ public class Monster1 : MonoBehaviour
     {
         var chasing = "Chasing";
         fsm = new StateMachine<string>();
-        fsm.AddState(chasing , new Chasing(transform , target , animator , moveSpeed));
+        fsm.AddState(chasing , new Chasing(this , target , animator , moveSpeed));
         fsm.SetStartState(chasing);
         fsm.Init();
     }

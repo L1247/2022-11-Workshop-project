@@ -11,17 +11,17 @@ public class ChasingTests
 #region Test Methods
 
     [Test]
-    [TestCase(1.42f , 1.42f , 0.71f , 0.71f , Facing.Right ,
+    [TestCase(1.42f , 1.42f , 0.71f , 0.71f , Facing.Left , Facing.Right,
               Description = "右")]
-    [TestCase(-1.42f , -1.42f , -0.71f , -0.71f , Facing.Left ,
+    [TestCase(-1.42f , -1.42f , -0.71f , -0.71f , Facing.Right, Facing.Left ,
               Description = "左")]
     [Category("Moving")]
-    public void _01_MoveTowardsTarget(float targetPosX , float targetPosY , float frame1X , float frame1Y , Facing facing)
+    public void _01_MoveTowardsTarget(float targetPosX , float targetPosY , float frame1X , float frame1Y , Facing defaultFacing, Facing expectedFacing)
     {
         var self = Given_A_Monster1_With_Pos(Given_Pos(0 , 0));
-        Given_A_Facing(self , facing);
+        Given_A_Facing(self , defaultFacing);
         var target  = Given_A_Monster1_With_Pos(Given_Pos(targetPosX , targetPosY));
-        var chasing = new Chasing(self.transform , target.transform , null , 1);
+        var chasing = new Chasing(self , target.transform , null , 1);
 
         UpdateTheState(chasing);
         Should_Position_Equal(self.GetPos() , frame1X , frame1Y);
@@ -29,7 +29,7 @@ public class ChasingTests
         UpdateTheState(chasing);
         Should_Position_Equal(self.GetPos() , targetPosX , targetPosY);
 
-        Should_Facing_Is(self , facing);
+        Should_Facing_Is(self , expectedFacing);
     }
 
     [Test]
@@ -43,7 +43,7 @@ public class ChasingTests
         var self = Given_A_Monster1_With_Pos(Given_Pos(selfPosX , selfPosY));
         Given_A_Facing(self , facing);
         var target  = Given_A_Monster1_With_Pos(Given_Pos(targetPosY , targetPosY));
-        var chasing = new Chasing(self.transform , target.transform , null , 1);
+        var chasing = new Chasing(self , target.transform , null , 1);
 
         UpdateTheState(chasing);
         Should_Position_Equal(self.GetPos() , selfPosX , selfPosY);
