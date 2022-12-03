@@ -1,6 +1,5 @@
 #region
 
-using System;
 using FSM;
 using UnityEngine;
 
@@ -8,31 +7,49 @@ using UnityEngine;
 
 internal class Chasing : State<string>
 {
-    private Transform self;
-    private float moveSpeed;
-    private Transform target;
-    private Animator animator;
+#region Private Variables
 
-    #region Constructor
+    private readonly Transform self;
+    private readonly float     moveSpeed;
+    private readonly Transform target;
+    private readonly Animator  animator;
+    private readonly float     stopDistance = 0.1f;
+    private readonly Vector3   rightVector  = new Vector3(1 ,  1 , 1);
+    private readonly Vector3   leftVector   = new Vector3(-1 , 1 , 1);
+
+#endregion
+
+#region Constructor
 
     public Chasing(Transform self , Transform target , Animator animator , float moveSpeed)
     {
-        this.self = self;
-        this.target = target;
-        this.animator = animator;
+        this.self      = self;
+        this.target    = target;
+        this.animator  = animator;
         this.moveSpeed = moveSpeed;
     }
+
+#endregion
+
+#region Public Methods
 
     public override void OnEnter()
     {
         animator.Play("Walk");
     }
+
     public override void OnLogic()
     {
-        var dir = (target.position - self.position).normalized;
+        var targetPosition     = target.position;
+        var selfPosition       = self.position;
+        var dir                = (targetPosition - selfPosition).normalized;
+        var distanceWithTarget = Vector2.Distance(targetPosition , selfPosition);
+        var needStop           = distanceWithTarget <= stopDistance;
+        if (needStop) return;
         self.Translate(dir * moveSpeed * Time.deltaTime);
-        self.localScale = dir.x > 0 ? new Vector3(1, 1, 1) : new Vector3(-1, 1, 1);
+        var facingRight = dir.x > 0;
+        self.localScale = facingRight ? rightVector : leftVector;
     }
 
-    #endregion
+#endregion
 }
