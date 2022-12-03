@@ -75,6 +75,9 @@ public class ChasingTests
         Should_Facing_Is(self , expectedFacing);
     }
 
+    [Test(Description = "追擊_無目標")]
+    public void _04_Move_With_No_Target() { }
+
 #endregion
 
 #region Private Methods
