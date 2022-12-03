@@ -22,7 +22,7 @@ public class ChasingTests
         var self = Given_A_Monster1_With_Pos(Given_Pos(0 , 0));
         Given_A_Facing(self , defaultFacing);
         var target  = Given_A_Monster1_With_Pos(Given_Pos(targetPosX , targetPosY));
-        var chasing = Given_A_Chasing_State(self , target);
+        var chasing = Given_A_Chasing_State(self , target.transform);
 
         UpdateTheState(chasing);
         Should_Position_Equal(self.GetPos() , frame1X , frame1Y);
@@ -45,7 +45,7 @@ public class ChasingTests
         var self = Given_A_Monster1_With_Pos(Given_Pos(selfPosX , selfPosY));
         Given_A_Facing(self , facing);
         var target  = Given_A_Monster1_With_Pos(Given_Pos(targetPosY , targetPosY));
-        var chasing = Given_A_Chasing_State(self , target);
+        var chasing = Given_A_Chasing_State(self , target.transform);
 
         UpdateTheState(chasing);
         Should_Position_Equal(self.GetPos() , selfPosX , selfPosY);
@@ -64,7 +64,7 @@ public class ChasingTests
         var self = Given_A_Monster1_With_Pos(Given_Pos(0 , 0));
         Given_A_Facing(self , defaultFacing);
         var target  = Given_A_Monster1_With_Pos(Given_Pos(targetPosX , targetPosY));
-        var chasing = Given_A_Chasing_State(self , target , 9999);
+        var chasing = Given_A_Chasing_State(self , target.transform , 9999);
 
         UpdateTheState(chasing);
         Should_Position_Equal(self.GetPos() , frame1X , frame1Y);
@@ -79,9 +79,9 @@ public class ChasingTests
 
 #region Private Methods
 
-    private static Chasing Given_A_Chasing_State(Monster1 self , Monster1 target , float moveSpeed = 1)
+    private static Chasing Given_A_Chasing_State(Monster1 self , Transform target , float moveSpeed = 1)
     {
-        var chasing = new Chasing(self , target.transform , null , moveSpeed);
+        var chasing = new Chasing(self , target , null , moveSpeed);
         chasing.SetDeltaTime(1);
         return chasing;
     }
