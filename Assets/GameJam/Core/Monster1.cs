@@ -1,6 +1,7 @@
 #region
 
 using FSM;
+using GameJam.Core;
 using UnityEngine;
 
 #endregion
@@ -10,6 +11,8 @@ public class Monster1 : MonoBehaviour
 #region Private Variables
 
     private StateMachine<string> fsm;
+
+    private Facing facing;
 
     [SerializeField]
     private Animator animator;
@@ -38,6 +41,30 @@ public class Monster1 : MonoBehaviour
     private void Update()
     {
         fsm.OnLogic();
+    }
+
+#endregion
+
+#region Public Methods
+
+    public Facing GetFacing()
+    {
+        return facing;
+    }
+
+    public Vector3 GetPos()
+    {
+        return transform.position;
+    }
+
+    public void SetFacing(Facing facing)
+    {
+        this.facing = facing;
+    }
+
+    public void SetPos(Vector3 pos)
+    {
+        transform.position = pos;
     }
 
 #endregion
