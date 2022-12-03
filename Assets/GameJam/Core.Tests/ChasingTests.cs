@@ -27,7 +27,27 @@ public class ChasingTests
         Should_Transform_Facing_X(self , scaleX);
     }
 
-#endregion
+    [Test]
+    [TestCase(1, 1, 0.99f, 0.99f, 1)]
+    [TestCase(-1, -1, -0.99f, -0.99f, -1)]
+    public void _02_StopMoving(float targetPosX, float targetPosY, float selfPosX, float selfPosY, float defaultScaleX)
+    {
+        var self = Given_A_Transform_With_Pos(Given_Pos(selfPosX, selfPosY));
+        Given_A_Facing(defaultScaleX, self);
+        var target = Given_A_Transform_With_Pos(Given_Pos(targetPosY, targetPosY));
+        var chasing = new Chasing(self, target, null, 1);
+
+        UpdateTheState(chasing);
+        Should_Position_Equal(self.position, selfPosX, selfPosY);
+        Should_Transform_Facing_X(self, defaultScaleX);
+    }
+
+    private static void Given_A_Facing(float defaultScaleX, Transform self)
+    {
+        self.localScale = new Vector3(defaultScaleX, self.localScale.y, self.localScale.z);
+    }
+
+    #endregion
 
 #region Private Methods
 
