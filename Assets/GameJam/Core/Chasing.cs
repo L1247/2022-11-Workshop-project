@@ -23,6 +23,10 @@ internal class Chasing : State<string>
         this.moveSpeed = moveSpeed;
     }
 
+    public override void OnEnter()
+    {
+        animator.Play("Walk");
+    }
     public override void OnLogic()
     {
         var dir = (target.position - self.position).normalized;
