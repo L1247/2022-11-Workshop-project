@@ -59,7 +59,10 @@ public class Monster1 : MonoBehaviour
 
     public void SetFacing(Facing facing)
     {
+        if (facing == Facing.None) return;
         this.facing = facing;
+        var facingValue = facing == Facing.Right ? 1 : -1;
+        transform.localScale = new Vector3(facingValue , 1 , 1);
     }
 
     public void SetPos(Vector3 pos)
