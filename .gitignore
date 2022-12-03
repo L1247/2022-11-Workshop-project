@@ -89,3 +89,7 @@ UserSettings/
 ProjectSettings/ProjectVersion.txt
 
 Assets/Editor/Setting/
+
+CodeCoverage/
+
+ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json
