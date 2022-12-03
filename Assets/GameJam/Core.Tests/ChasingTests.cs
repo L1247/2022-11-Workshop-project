@@ -33,6 +33,7 @@ public class ChasingTests
         Should_Facing_Is(self , expectedFacing);
     }
 
+
     [Test]
     [TestCase(-1 , -1 , -0.99f , -0.99f , Facing.Left ,
               Description = "左")]
@@ -51,13 +52,36 @@ public class ChasingTests
         Should_Facing_Is(self , facing);
     }
 
+    [Test]
+    [TestCase(                              -1.42f , -1.42f , -1.42f , -1.42f , Facing.Right ,
+                             Facing.Left ,  Description = "左")]
+    [TestCase(                              1.42f , 1.42f , 1.42f , 1.42f , Facing.Left ,
+                             Facing.Right , Description = "右")]
+    [Category("Moving")]
+    public void _03_MoveSpeed_Is_High(float  targetPosX , float targetPosY , float frame1X , float frame1Y , Facing defaultFacing ,
+                                      Facing expectedFacing)
+    {
+        var self = Given_A_Monster1_With_Pos(Given_Pos(0 , 0));
+        Given_A_Facing(self , defaultFacing);
+        var target  = Given_A_Monster1_With_Pos(Given_Pos(targetPosX , targetPosY));
+        var chasing = Given_A_Chasing_State(self , target , 9999);
+
+        UpdateTheState(chasing);
+        Should_Position_Equal(self.GetPos() , frame1X , frame1Y);
+
+        UpdateTheState(chasing);
+        Should_Position_Equal(self.GetPos() , targetPosX , targetPosY);
+
+        Should_Facing_Is(self , expectedFacing);
+    }
+
 #endregion
 
 #region Private Methods
 
-    private static Chasing Given_A_Chasing_State(Monster1 self , Monster1 target)
+    private static Chasing Given_A_Chasing_State(Monster1 self , Monster1 target , float moveSpeed = 1)
     {
-        var chasing = new Chasing(self , target.transform , null , 1);
+        var chasing = new Chasing(self , target.transform , null , moveSpeed);
         chasing.SetDeltaTime(1);
         return chasing;
     }

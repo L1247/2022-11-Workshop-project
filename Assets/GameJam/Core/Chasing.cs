@@ -47,9 +47,13 @@ public class Chasing : State<string>
         var needStop           = distanceWithTarget <= stopDistance;
         if (needStop) return;
 
-        var time   = deltaTime != 1 ? Time.deltaTime : deltaTime;
-        var newPos = Vector3.MoveTowards(selfPosition , targetPosition , moveSpeed * time);
-        self.SetPos(newPos);
+        var time = deltaTime != 1 ? Time.deltaTime : deltaTime;
+
+        // moveSpeed: 9999
+        var movement = selfPosition + dir * moveSpeed * time;
+        self.SetPos(movement);
+        // var newPos   = Vector3.MoveTowards(selfPosition , targetPosition , movement);
+        // self.SetPos(newPos);
         var facingRight = dir.x > 0;
         self.SetFacing(facingRight ? Facing.Right : Facing.Left);
     }
