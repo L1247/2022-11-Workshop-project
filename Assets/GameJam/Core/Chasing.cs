@@ -10,7 +10,7 @@ public class Chasing : State<string>
 {
 #region Private Variables
 
-    private readonly Monster1  self;
+    private readonly Monster1  monster1;
     private readonly float     moveSpeed;
     private readonly Transform target;
     private readonly Animator  animator;
@@ -21,9 +21,9 @@ public class Chasing : State<string>
 
 #region Constructor
 
-    public Chasing(Monster1 self , Transform target , Animator animator , float moveSpeed)
+    public Chasing(Monster1 monster1 , Transform target , Animator animator , float moveSpeed)
     {
-        this.self      = self;
+        this.monster1  = monster1;
         this.target    = target;
         this.animator  = animator;
         this.moveSpeed = moveSpeed;
@@ -44,24 +44,22 @@ public class Chasing : State<string>
         if (noTarget) return;
 
         var targetPosition     = target.position;
-        var selfPosition       = self.GetPos();
-        var dir                = (targetPosition - selfPosition).normalized;
-        var distanceWithTarget = Vector2.Distance(targetPosition , selfPosition);
+        var monsterPos         = monster1.GetPos();
+        var dir                = (targetPosition - monsterPos).normalized;
+        var distanceWithTarget = Vector2.Distance(targetPosition , monsterPos);
         var needStop           = distanceWithTarget <= stopDistance;
         if (needStop) return;
 
         var time = deltaTime != 1 ? Time.deltaTime : deltaTime;
 
-        // moveSpeed: 9999
-        var movement         = selfPosition + dir * moveSpeed * time;
-        var newDistance      = Vector2.Distance(targetPosition , movement);
-        var moveOverPosition = newDistance >= distanceWithTarget;
-        var finalPosition    = moveOverPosition ? targetPosition : movement;
-        self.SetPos(finalPosition);
-        // var newPos = Vector3.MoveTowards(selfPosition , targetPosition , moveSpeed * time);
-        // self.SetPos(newPos);
+        var movement           = monsterPos + dir * moveSpeed * time;
+        var newDistance        = Vector2.Distance(targetPosition , movement);
+        var overOriginDistance = newDistance >= distanceWithTarget;
+        var finalPosition      = overOriginDistance ? targetPosition : movement;
+        monster1.SetPos(finalPosition);
+
         var facingRight = dir.x > 0;
-        self.SetFacing(facingRight ? Facing.Right : Facing.Left);
+        monster1.SetFacing(facingRight ? Facing.Right : Facing.Left);
     }
 
     public void SetDeltaTime(int deltaTime)
