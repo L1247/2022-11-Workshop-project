@@ -10,7 +10,7 @@ internal class Chasing : State<string>
 {
 #region Constructor
 
-    public Chasing(Transform transform , Transform target , Animator animator , float moveSpeed)
+    public Chasing(Transform self , Transform target , Animator animator , float moveSpeed)
     {
         throw new NotImplementedException();
     }
