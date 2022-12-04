@@ -11,7 +11,7 @@ public class DeathTests : GGJTests
 {
 #region Setup/Teardown Methods
 
-    [TearDown]
+    [SetUp]
     public void CleanUp()
     {
         foreach (var gameObject in Object.FindObjectsOfType<GameObject>())
