@@ -2,9 +2,10 @@
     "name": "GameJam.PlayModeTests",
     "rootNamespace": "",
     "references": [
-        "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner",
-        "GameJam.Core"
+      "UnityEngine.TestRunner",
+      "UnityEditor.TestRunner",
+      "GameJam.Core",
+      "GameJam.CoreTests"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

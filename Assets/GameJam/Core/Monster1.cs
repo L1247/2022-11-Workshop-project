@@ -47,8 +47,6 @@ public class Monster1 : MonoBehaviour
         fsm.AddState(chasing , new Chasing(this));
         fsm.AddState(death , new Death(this));
         fsm.AddTransitionFromAny(death , _ => health <= 0);
-        fsm.AddTransition(chasing , death , _ => health > 0);
-        fsm.AddTransition(death , chasing , _ => health > 0);
         fsm.SetStartState(chasing);
         fsm.Init();
     }

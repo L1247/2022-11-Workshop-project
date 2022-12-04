@@ -8,7 +8,7 @@ using UnityEngine.TestTools;
 
 #endregion
 
-public class Monster1RuntimeTests
+public class Monster1RuntimeTests : GGJTests
 {
 #region Public Methods
 
@@ -25,7 +25,7 @@ public class Monster1RuntimeTests
         monster.SetTarget(target.transform);
         Assert.IsNotNull(monster);
         yield return new WaitForSeconds(1);
-        Assert.AreEqual(new Vector3(0.05f , 0.05f , 0f) , monster.GetPos());
+        Should_Position_Equal(monster.GetPos() , 0.05f , 0.05f);
     }
 
     [UnityTest]
