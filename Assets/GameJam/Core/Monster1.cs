@@ -71,4 +71,9 @@ public class Monster1 : MonoBehaviour
     }
 
 #endregion
+
+    public void SetTarget(Transform target)
+    {
+        this.target = target;
+    }
 }
