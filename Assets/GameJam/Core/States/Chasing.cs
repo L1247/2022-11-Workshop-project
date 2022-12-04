@@ -12,7 +12,7 @@ namespace GameJam.Core.States
     #region Private Variables
 
         private readonly Monster1 monster1;
-        private readonly float    stopDistance = 0.1f;
+        private          float    stopDistance = 0.1f;
         private          int      deltaTime;
 
     #endregion
@@ -63,6 +63,11 @@ namespace GameJam.Core.States
         public void SetDeltaTime(int deltaTime)
         {
             this.deltaTime = deltaTime;
+        }
+
+        public void SetStopDistance(int value)
+        {
+            stopDistance = value;
         }
 
     #endregion
