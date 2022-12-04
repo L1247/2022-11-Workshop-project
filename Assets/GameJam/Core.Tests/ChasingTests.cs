@@ -100,6 +100,23 @@ public class ChasingTests
         monster1.UnityComponent.Received(1).PlayAnimation("Chasing");
     }
 
+    [Test(Description = "當快靠近目標，不要順移過去")]
+    [Category("Bug")]
+    public void _101_Should_Not_Teleport_Position_When_Closing_Target()
+    {
+        var monster1 = Given_A_Monster1_With_Pos(Given_Pos(-0.30f , 2.39f));
+        monster1.SetMoveSpeed(1);
+        var target = Given_A_Monster1_With_Pos(Given_Pos(1.86f , 3.39f));
+        monster1.SetTarget(target.transform);
+        var chasing = Given_A_Chasing_State(monster1);
+        UpdateTheState(chasing);
+        var posX = monster1.GetPos().x;
+        var posY = monster1.GetPos().y;
+
+        Assert.AreNotEqual(1.86f , posX);
+        Assert.AreNotEqual(3.39f , posY);
+    }
+
 #endregion
 
 #region Private Methods

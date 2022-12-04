@@ -49,9 +49,10 @@ public class Chasing : State<string>
         var time = deltaTime != 1 ? Time.deltaTime : deltaTime;
 
         var moveSpeed          = monster1.GetMoveSpeed();
-        var movement           = monsterPos + normalizedDir * moveSpeed * time;
+        var movement           = normalizedDir * moveSpeed * time;
         var overOriginDistance = movement.magnitude >= dir.magnitude;
         var finalPosition      = overOriginDistance ? targetPosition : movement;
+        finalPosition += monsterPos;
         monster1.SetPos(finalPosition);
 
         var facingRight = normalizedDir.x > 0;
