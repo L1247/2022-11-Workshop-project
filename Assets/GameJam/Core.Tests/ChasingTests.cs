@@ -93,6 +93,7 @@ public class ChasingTests
         var monster1     = Give_A_Monster1();
         var chasingState = Given_A_Chasing_State(monster1 , null);
         chasingState.OnEnter();
+
         monster1.UnityComponent.Received(1).PlayAnimation("Chasing");
     }
 
@@ -110,7 +111,7 @@ public class ChasingTests
 
     private static Chasing Given_A_Chasing_State(Monster1 monster1 , Transform target , float moveSpeed = 1)
     {
-        var chasing = new Chasing(monster1 , target , null , moveSpeed);
+        var chasing = new Chasing(monster1 , target , moveSpeed);
         chasing.SetDeltaTime(1);
         return chasing;
     }

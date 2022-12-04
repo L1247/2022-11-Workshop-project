@@ -1,6 +1,6 @@
 ﻿#region
 
-using System;
+using UnityEngine;
 
 #endregion
 
@@ -17,11 +17,26 @@ namespace GameJam.Core
 
     public class UnityComponent : IUnityComponent
     {
+    #region Private Variables
+
+        private readonly Animator animator;
+
+    #endregion
+
+    #region Constructor
+
+        public UnityComponent(Animator animator)
+        {
+            this.animator = animator;
+        }
+
+    #endregion
+
     #region Public Methods
 
         public void PlayAnimation(string animationName)
         {
-            throw new NotImplementedException();
+            animator.Play(animationName);
         }
 
     #endregion

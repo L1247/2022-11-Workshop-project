@@ -13,7 +13,6 @@ public class Chasing : State<string>
     private readonly Monster1  monster1;
     private readonly float     moveSpeed;
     private readonly Transform target;
-    private readonly Animator  animator;
     private readonly float     stopDistance = 0.1f;
     private          int       deltaTime;
 
@@ -21,11 +20,10 @@ public class Chasing : State<string>
 
 #region Constructor
 
-    public Chasing(Monster1 monster1 , Transform target , Animator animator , float moveSpeed)
+    public Chasing(Monster1 monster1 , Transform target , float moveSpeed)
     {
         this.monster1  = monster1;
         this.target    = target;
-        this.animator  = animator;
         this.moveSpeed = moveSpeed;
     }
 
@@ -35,7 +33,6 @@ public class Chasing : State<string>
 
     public override void OnEnter()
     {
-        // animator.Play("Walk");
         monster1.PlayAnimation("Chasing");
     }
 

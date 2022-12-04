@@ -36,9 +36,10 @@ public class Monster1 : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        SetUnityComponent(new UnityComponent(animator));
         var chasing = "Chasing";
         fsm = new StateMachine<string>();
-        fsm.AddState(chasing , new Chasing(this , target , animator , moveSpeed));
+        fsm.AddState(chasing , new Chasing(this , target , moveSpeed));
         fsm.SetStartState(chasing);
         fsm.Init();
     }
