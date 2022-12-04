@@ -11,7 +11,7 @@ public class Chasing : State<string>
 #region Private Variables
 
     private readonly Monster1 monster1;
-    private readonly float    moveSpeed;
+    // private readonly float    moveSpeed;
     private readonly float    stopDistance = 0.1f;
     private          int      deltaTime;
 
@@ -19,10 +19,10 @@ public class Chasing : State<string>
 
 #region Constructor
 
-    public Chasing(Monster1 monster1 , float moveSpeed)
+    public Chasing(Monster1 monster1) //, float moveSpeed)
     {
         this.monster1  = monster1;
-        this.moveSpeed = moveSpeed;
+        // this.moveSpeed = moveSpeed;
     }
 
 #endregion
@@ -49,6 +49,7 @@ public class Chasing : State<string>
 
         var time = deltaTime != 1 ? Time.deltaTime : deltaTime;
 
+        var moveSpeed          = monster1.GetMoveSpeed();
         var movement           = monsterPos + dir * moveSpeed * time;
         var newDistance        = Vector2.Distance(targetPosition , movement);
         var overOriginDistance = newDistance >= distanceWithTarget;

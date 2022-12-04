@@ -23,6 +23,7 @@ public class ChasingTests
         var monster1 = Given_A_Monster1_With_Pos(Given_Pos(0 , 0));
         var target   = Given_A_Monster1_With_Pos(Given_Pos(targetPosX , targetPosY));
         monster1.SetTarget(target.transform);
+        monster1.SetMoveSpeed(1);
         Given_A_Facing(monster1 , defaultFacing);
         var chasing = Given_A_Chasing_State(monster1);
 
@@ -65,7 +66,8 @@ public class ChasingTests
         var target   = Given_A_Monster1_With_Pos(Given_Pos(targetPosX , targetPosY));
         monster1.SetTarget(target.transform);
         Given_A_Facing(monster1 , defaultFacing);
-        var chasing = Given_A_Chasing_State(monster1 , 9999);
+        monster1.SetMoveSpeed(9999);
+        var chasing = Given_A_Chasing_State(monster1);
 
         UpdateTheState(chasing);
         Should_Position_Equal(monster1.GetPos() , frame1X , frame1Y);
@@ -110,9 +112,10 @@ public class ChasingTests
         return monster1;
     }
 
-    private static Chasing Given_A_Chasing_State(Monster1 monster1 , float moveSpeed = 1)
+    private static Chasing Given_A_Chasing_State(Monster1 monster1)
     {
-        var chasing = new Chasing(monster1 , moveSpeed);
+        // var chasing = new Chasing(monster1 , moveSpeed);
+        var chasing = new Chasing(monster1);
         chasing.SetDeltaTime(1);
         return chasing;
     }

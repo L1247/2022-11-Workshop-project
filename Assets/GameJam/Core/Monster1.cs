@@ -39,7 +39,8 @@ public class Monster1 : MonoBehaviour
         SetUnityComponent(new UnityComponent(animator));
         var chasing = "Chasing";
         fsm = new StateMachine<string>();
-        fsm.AddState(chasing , new Chasing(this , moveSpeed));
+        // fsm.AddState(chasing , new Chasing(this , moveSpeed));
+        fsm.AddState(chasing , new Chasing(this));
         fsm.SetStartState(chasing);
         fsm.Init();
     }
@@ -97,5 +98,12 @@ public class Monster1 : MonoBehaviour
         UnityComponent = unityComponent;
     }
 
-#endregion
+    public void SetMoveSpeed(float moveSpeed)
+    {
+        this.moveSpeed = moveSpeed;
+    }
+
+    public float GetMoveSpeed() => moveSpeed;
+
+    #endregion
 }
