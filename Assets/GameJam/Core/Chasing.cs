@@ -40,7 +40,8 @@ public class Chasing : State<string>
 
         var targetPosition     = target.position;
         var monsterPos         = monster1.GetPos();
-        var dir                = (targetPosition - monsterPos).normalized;
+        var dir                = targetPosition - monsterPos;
+        var normalizedDir      = dir.normalized;
         var distanceWithTarget = Vector2.Distance(targetPosition , monsterPos);
         var needStop           = distanceWithTarget <= stopDistance;
         if (needStop) return;
@@ -48,13 +49,12 @@ public class Chasing : State<string>
         var time = deltaTime != 1 ? Time.deltaTime : deltaTime;
 
         var moveSpeed          = monster1.GetMoveSpeed();
-        var movement           = monsterPos + dir * moveSpeed * time;
-        var newDistance        = Vector2.Distance(targetPosition , movement);
-        var overOriginDistance = newDistance >= distanceWithTarget;
+        var movement           = monsterPos + normalizedDir * moveSpeed * time;
+        var overOriginDistance = movement.magnitude >= dir.magnitude;
         var finalPosition      = overOriginDistance ? targetPosition : movement;
         monster1.SetPos(finalPosition);
 
-        var facingRight = dir.x > 0;
+        var facingRight = normalizedDir.x > 0;
         monster1.SetFacing(facingRight ? Facing.Right : Facing.Left);
     }
 
