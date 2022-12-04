@@ -1,13 +1,13 @@
 ﻿#region
 
 using GameJam.Core;
+using GameJam.Core.States;
 using NSubstitute;
 using NUnit.Framework;
-using UnityEngine;
 
 #endregion
 
-public class ChasingTests
+public class ChasingTests : GGJTests
 {
 #region Test Methods
 
@@ -121,14 +121,6 @@ public class ChasingTests
 
 #region Private Methods
 
-    private static Monster1 Give_A_Monster1()
-    {
-        var unityComponent = Substitute.For<IUnityComponent>();
-        var monster1       = new GameObject("monster1").AddComponent<Monster1>();
-        monster1.SetUnityComponent(unityComponent);
-        return monster1;
-    }
-
     private static Chasing Given_A_Chasing_State(Monster1 monster1)
     {
         // var chasing = new Chasing(monster1 , moveSpeed);
@@ -142,30 +134,9 @@ public class ChasingTests
         monster1.SetFacing(facing);
     }
 
-    private static Monster1 Given_A_Monster1_With_Pos(Vector3 pos)
-    {
-        var monster1 = Give_A_Monster1();
-        monster1.SetPos(pos);
-        return monster1;
-    }
-
-    private static Vector3 Given_Pos(float x , float y)
-    {
-        var targetPosition = new Vector3(x , y , 0);
-        return targetPosition;
-    }
-
     private static void Should_Facing_Is(Monster1 monster1 , Facing exceptedFacing)
     {
         Assert.AreEqual(exceptedFacing , monster1.GetFacing());
-    }
-
-    private static void Should_Position_Equal(Vector3 pos , float exceptedX , float exceptedY)
-    {
-        var posX = pos.x;
-        var posY = pos.y;
-        Assert.AreEqual(exceptedX , posX , 0.01f , "x is not equal.");
-        Assert.AreEqual(exceptedY , posY , 0.01f , "y is not equal.");
     }
 
     private static void UpdateTheState(Chasing chasing)
