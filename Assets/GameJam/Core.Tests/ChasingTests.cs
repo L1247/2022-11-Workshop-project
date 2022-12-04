@@ -1,6 +1,7 @@
 ﻿#region
 
 using GameJam.Core;
+using NSubstitute;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -34,9 +35,9 @@ public class ChasingTests
     }
 
     [Test(Description = "距離靠近，停止移動")]
-    [TestCase(-1 , -1 , -0.99f , -0.99f , Facing.Left ,
+    [TestCase(-1 , -1 , -0.95f , -0.95f , Facing.Left ,
               Description = "左")]
-    [TestCase(1 , 1 , 0.99f , 0.99f , Facing.Right ,
+    [TestCase(1 , 1 , 0.95f , 0.95f , Facing.Right ,
               Description = "右")]
     [Category("Moving")]
     public void _02_StopMoving(float targetPosX , float targetPosY , float monster1PosX , float monster1PosY , Facing facing)
@@ -85,9 +86,27 @@ public class ChasingTests
         Should_Position_Equal(monster1.GetPos() , 0 , 0);
     }
 
+    [Test(Description = "進入Chasing，播放動畫")]
+    [Category("Animation")]
+    public void _05_Play_Animation_When_Enter_Chasing()
+    {
+        var monster1     = Give_A_Monster1();
+        var chasingState = Given_A_Chasing_State(monster1 , null);
+        chasingState.OnEnter();
+        monster1.UnityComponent.Received(1).PlayAnimation("Chasing");
+    }
+
 #endregion
 
 #region Private Methods
+
+    private static Monster1 Give_A_Monster1()
+    {
+        var unityComponent = Substitute.For<IUnityComponent>();
+        var monster1       = new GameObject("monster1").AddComponent<Monster1>();
+        monster1.SetUnityComponent(unityComponent);
+        return monster1;
+    }
 
     private static Chasing Given_A_Chasing_State(Monster1 monster1 , Transform target , float moveSpeed = 1)
     {
@@ -103,7 +122,7 @@ public class ChasingTests
 
     private static Monster1 Given_A_Monster1_With_Pos(Vector3 pos)
     {
-        var monster1 = new GameObject("monster1").AddComponent<Monster1>();
+        var monster1 = Give_A_Monster1();
         monster1.SetPos(pos);
         return monster1;
     }

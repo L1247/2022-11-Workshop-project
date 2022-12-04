@@ -35,7 +35,8 @@ public class Chasing : State<string>
 
     public override void OnEnter()
     {
-        animator.Play("Walk");
+        // animator.Play("Walk");
+        monster1.PlayAnimation("Chasing");
     }
 
     public override void OnLogic()

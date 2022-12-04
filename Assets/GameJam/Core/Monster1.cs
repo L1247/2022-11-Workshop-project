@@ -8,6 +8,12 @@ using UnityEngine;
 
 public class Monster1 : MonoBehaviour
 {
+#region Public Variables
+
+    public IUnityComponent UnityComponent { get; private set; }
+
+#endregion
+
 #region Private Variables
 
     private StateMachine<string> fsm;
@@ -57,6 +63,11 @@ public class Monster1 : MonoBehaviour
         return transform.position;
     }
 
+    public void PlayAnimation(string animationName)
+    {
+        UnityComponent.PlayAnimation(animationName);
+    }
+
     public void SetFacing(Facing facing)
     {
         if (facing == Facing.None) return;
@@ -70,10 +81,15 @@ public class Monster1 : MonoBehaviour
         transform.position = pos;
     }
 
-#endregion
-
     public void SetTarget(Transform target)
     {
         this.target = target;
     }
+
+    public void SetUnityComponent(IUnityComponent unityComponent)
+    {
+        UnityComponent = unityComponent;
+    }
+
+#endregion
 }
