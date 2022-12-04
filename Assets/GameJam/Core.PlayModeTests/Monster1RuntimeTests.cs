@@ -22,7 +22,7 @@ public class Monster1RuntimeTests
         monster.SetPos(new Vector3(5 , 5 , 0));
         var target = Object.Instantiate(monsterPrefab).GetComponent<Monster1>();
         target.SetPos(Vector3.zero);
-        monster.SetTarget(target.transform);
+        // monster.SetTarget(target.transform);
         Assert.IsNotNull(monster);
         yield return new WaitForSeconds(5);
         Assert.AreEqual(Vector3.zero , monster.GetPos());

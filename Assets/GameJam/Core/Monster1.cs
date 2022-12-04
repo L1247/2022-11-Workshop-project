@@ -39,7 +39,7 @@ public class Monster1 : MonoBehaviour
         SetUnityComponent(new UnityComponent(animator));
         var chasing = "Chasing";
         fsm = new StateMachine<string>();
-        fsm.AddState(chasing , new Chasing(this , target , moveSpeed));
+        fsm.AddState(chasing , new Chasing(this , moveSpeed));
         fsm.SetStartState(chasing);
         fsm.Init();
     }
@@ -62,6 +62,11 @@ public class Monster1 : MonoBehaviour
     public Vector3 GetPos()
     {
         return transform.position;
+    }
+
+    public Transform GetTarget()
+    {
+        return target;
     }
 
     public void PlayAnimation(string animationName)

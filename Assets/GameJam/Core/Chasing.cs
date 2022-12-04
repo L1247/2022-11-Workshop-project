@@ -10,20 +10,18 @@ public class Chasing : State<string>
 {
 #region Private Variables
 
-    private readonly Monster1  monster1;
-    private readonly float     moveSpeed;
-    private readonly Transform target;
-    private readonly float     stopDistance = 0.1f;
-    private          int       deltaTime;
+    private readonly Monster1 monster1;
+    private readonly float    moveSpeed;
+    private readonly float    stopDistance = 0.1f;
+    private          int      deltaTime;
 
 #endregion
 
 #region Constructor
 
-    public Chasing(Monster1 monster1 , Transform target , float moveSpeed)
+    public Chasing(Monster1 monster1 , float moveSpeed)
     {
         this.monster1  = monster1;
-        this.target    = target;
         this.moveSpeed = moveSpeed;
     }
 
@@ -38,6 +36,7 @@ public class Chasing : State<string>
 
     public override void OnLogic()
     {
+        var target   = monster1.GetTarget();
         var noTarget = target == null;
         if (noTarget) return;
 

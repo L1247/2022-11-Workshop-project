@@ -21,9 +21,10 @@ public class ChasingTests
                                       Facing expectedFacing)
     {
         var monster1 = Given_A_Monster1_With_Pos(Given_Pos(0 , 0));
+        var target   = Given_A_Monster1_With_Pos(Given_Pos(targetPosX , targetPosY));
+        monster1.SetTarget(target.transform);
         Given_A_Facing(monster1 , defaultFacing);
-        var target  = Given_A_Monster1_With_Pos(Given_Pos(targetPosX , targetPosY));
-        var chasing = Given_A_Chasing_State(monster1 , target.transform);
+        var chasing = Given_A_Chasing_State(monster1);
 
         UpdateTheState(chasing);
         Should_Position_Equal(monster1.GetPos() , frame1X , frame1Y);
@@ -44,8 +45,7 @@ public class ChasingTests
     {
         var monster1 = Given_A_Monster1_With_Pos(Given_Pos(monster1PosX , monster1PosY));
         Given_A_Facing(monster1 , facing);
-        var target  = Given_A_Monster1_With_Pos(Given_Pos(targetPosY , targetPosY));
-        var chasing = Given_A_Chasing_State(monster1 , target.transform);
+        var chasing = Given_A_Chasing_State(monster1);
 
         UpdateTheState(chasing);
         Should_Position_Equal(monster1.GetPos() , monster1PosX , monster1PosY);
@@ -62,9 +62,10 @@ public class ChasingTests
                                       Facing defaultFacing , Facing expectedFacing)
     {
         var monster1 = Given_A_Monster1_With_Pos(Given_Pos(0 , 0));
+        var target   = Given_A_Monster1_With_Pos(Given_Pos(targetPosX , targetPosY));
+        monster1.SetTarget(target.transform);
         Given_A_Facing(monster1 , defaultFacing);
-        var target  = Given_A_Monster1_With_Pos(Given_Pos(targetPosX , targetPosY));
-        var chasing = Given_A_Chasing_State(monster1 , target.transform , 9999);
+        var chasing = Given_A_Chasing_State(monster1 , 9999);
 
         UpdateTheState(chasing);
         Should_Position_Equal(monster1.GetPos() , frame1X , frame1Y);
@@ -80,7 +81,7 @@ public class ChasingTests
     {
         var monster1 = Given_A_Monster1_With_Pos(Given_Pos(0 , 0));
         Given_A_Facing(monster1 , Facing.Right);
-        var chasing = Given_A_Chasing_State(monster1 , null);
+        var chasing = Given_A_Chasing_State(monster1);
 
         UpdateTheState(chasing);
         Should_Position_Equal(monster1.GetPos() , 0 , 0);
@@ -91,7 +92,7 @@ public class ChasingTests
     public void _05_Play_Animation_When_Enter_Chasing()
     {
         var monster1     = Give_A_Monster1();
-        var chasingState = Given_A_Chasing_State(monster1 , null);
+        var chasingState = Given_A_Chasing_State(monster1);
         chasingState.OnEnter();
 
         monster1.UnityComponent.Received(1).PlayAnimation("Chasing");
@@ -109,9 +110,9 @@ public class ChasingTests
         return monster1;
     }
 
-    private static Chasing Given_A_Chasing_State(Monster1 monster1 , Transform target , float moveSpeed = 1)
+    private static Chasing Given_A_Chasing_State(Monster1 monster1 , float moveSpeed = 1)
     {
-        var chasing = new Chasing(monster1 , target , moveSpeed);
+        var chasing = new Chasing(monster1 , moveSpeed);
         chasing.SetDeltaTime(1);
         return chasing;
     }
