@@ -13,7 +13,7 @@ namespace GameJam.Core.States
 
         private readonly Monster1 monster1;
         private          float    stopDistance = 0.1f;
-        private          int      deltaTime;
+        private          float    deltaTime;
 
     #endregion
 
@@ -52,15 +52,14 @@ namespace GameJam.Core.States
             var moveSpeed          = monster1.GetMoveSpeed();
             var movement           = normalizedDir * moveSpeed * time;
             var overOriginDistance = movement.magnitude >= dir.magnitude;
-            var finalPosition      = overOriginDistance ? targetPosition : movement;
-            finalPosition += monsterPos;
+            var finalPosition      = overOriginDistance ? targetPosition : movement + monsterPos;
             monster1.SetPos(finalPosition);
 
             var facingRight = normalizedDir.x > 0;
             monster1.SetFacing(facingRight ? Facing.Right : Facing.Left);
         }
 
-        public void SetDeltaTime(int deltaTime)
+        public void SetDeltaTime(float deltaTime)
         {
             this.deltaTime = deltaTime;
         }

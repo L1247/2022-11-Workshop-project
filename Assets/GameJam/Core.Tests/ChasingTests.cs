@@ -37,10 +37,10 @@ public class ChasingTests : GGJTests
     }
 
     [Test(Description = "距離靠近，停止移動")]
-    [TestCase(-1 , -1 , -0.71f , Description = "左")]
-    [TestCase(1 , 1 , 0.71f , Description = "右")]
+    [TestCase(-1 , -1 , -0.71f , Facing.Left , Description = "左")]
+    [TestCase(1 , 1 , 0.71f , Facing.Right , Description = "右")]
     [Category("Moving")]
-    public void _02_StopMoving(float targetPosX , float targetPosY , float exceptedValue)
+    public void _02_StopMoving(float targetPosX , float targetPosY , float exceptedValue , Facing expectedFacing)
     {
         var monster1 = Given_A_Monster1_With_Pos(Given_Pos(0 , 0));
         var target   = Given_A_Monster1_With_Pos(Given_Pos(targetPosX , targetPosX));
@@ -53,30 +53,29 @@ public class ChasingTests : GGJTests
         Should_Position_Equal(monster1.GetPos() , exceptedValue , exceptedValue);
         UpdateTheState(chasing);
         Should_Position_Equal(monster1.GetPos() , exceptedValue , exceptedValue);
+        Should_Facing_Is(monster1 , expectedFacing);
     }
 
     [Test(Description = "移動速度過快")]
-    [TestCase(-1.42f , -1.42f , -1.42f , -1.42f , Facing.Right ,
-              Facing.Left , Description = "左")]
-    [TestCase(1.42f , 1.42f , 1.42f , 1.42f , Facing.Left ,
-              Facing.Right , Description = "右")]
+    [TestCase(-12f , -3f , Facing.Right , Facing.Left , Description = "左")]
+    [TestCase(12f , 3f , Facing.Left , Facing.Right , Description = "右")]
     [Category("Moving")]
-    public void _03_MoveSpeed_Is_High(float  targetPosX ,    float  targetPosY , float frame1X , float frame1Y ,
+    public void _03_MoveSpeed_Is_High(float  targetPosX ,    float  targetPosY ,
                                       Facing defaultFacing , Facing expectedFacing)
     {
-        var monster1 = Given_A_Monster1_With_Pos(Given_Pos(0 , 0));
+        var monster1 = Given_A_Monster1_With_Pos(Given_Pos(1 , 1));
         var target   = Given_A_Monster1_With_Pos(Given_Pos(targetPosX , targetPosY));
+        var chasing  = Given_A_Chasing_State(monster1);
+        monster1.SetFacing(Facing.Left);
         monster1.SetTarget(target.transform);
-        Given_A_Facing(monster1 , defaultFacing);
         monster1.SetMoveSpeed(9999);
-        var chasing = Given_A_Chasing_State(monster1);
+        chasing.SetDeltaTime(0.016f);
 
         UpdateTheState(chasing);
-        Should_Position_Equal(monster1.GetPos() , frame1X , frame1Y);
-
-        UpdateTheState(chasing);
-
         Should_Position_Equal(monster1.GetPos() , targetPosX , targetPosY);
+        UpdateTheState(chasing);
+        Should_Position_Equal(monster1.GetPos() , targetPosX , targetPosY);
+
         Should_Facing_Is(monster1 , expectedFacing);
     }
 
