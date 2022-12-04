@@ -73,8 +73,8 @@ public class ChasingTests
         Should_Position_Equal(monster1.GetPos() , frame1X , frame1Y);
 
         UpdateTheState(chasing);
-        Should_Position_Equal(monster1.GetPos() , targetPosX , targetPosY);
 
+        Should_Position_Equal(monster1.GetPos() , targetPosX , targetPosY);
         Should_Facing_Is(monster1 , expectedFacing);
     }
 

@@ -11,7 +11,6 @@ public class Chasing : State<string>
 #region Private Variables
 
     private readonly Monster1 monster1;
-    // private readonly float    moveSpeed;
     private readonly float    stopDistance = 0.1f;
     private          int      deltaTime;
 
@@ -19,10 +18,9 @@ public class Chasing : State<string>
 
 #region Constructor
 
-    public Chasing(Monster1 monster1) //, float moveSpeed)
+    public Chasing(Monster1 monster1)
     {
-        this.monster1  = monster1;
-        // this.moveSpeed = moveSpeed;
+        this.monster1 = monster1;
     }
 
 #endregion
