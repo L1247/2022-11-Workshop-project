@@ -28,5 +28,16 @@ public class Monster1RuntimeTests
         Assert.AreEqual(Vector3.zero , monster.GetPos());
     }
 
+    [UnityTest]
+    public IEnumerator Monster_Initialization()
+    {
+        var monsterPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/GameJam/Prefab/Monster1.prefab");
+        var monster       = Object.Instantiate(monsterPrefab).GetComponent<Monster1>();
+        yield return null;
+        Assert.AreEqual("Chasing" , monster.GetStateTypeName("Chasing"));
+        Assert.AreEqual("Death" , monster.GetStateTypeName("Death"));
+        Assert.AreEqual("Chasing" , monster.GetCurrentStateTypeName());
+    }
+
 #endregion
 }

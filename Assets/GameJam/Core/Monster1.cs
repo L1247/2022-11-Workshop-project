@@ -39,8 +39,10 @@ public class Monster1 : MonoBehaviour
     {
         SetUnityComponent(new UnityComponent(animator));
         var chasing = "Chasing";
+        var death   = "Death";
         fsm = new StateMachine<string>();
         fsm.AddState(chasing , new Chasing(this));
+        fsm.AddState(death , new Death(this));
         fsm.SetStartState(chasing);
         fsm.Init();
     }
@@ -55,6 +57,11 @@ public class Monster1 : MonoBehaviour
 
 #region Public Methods
 
+    public string GetCurrentStateTypeName()
+    {
+        return fsm.ActiveState.GetType().Name;
+    }
+
     public Facing GetFacing()
     {
         return facing;
@@ -65,6 +72,12 @@ public class Monster1 : MonoBehaviour
     public Vector3 GetPos()
     {
         return transform.position;
+    }
+
+    public string GetStateTypeName(string key)
+    {
+        var state = fsm.GetState(key);
+        return state.GetType().Name;
     }
 
     public Transform GetTarget()
