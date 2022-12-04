@@ -30,6 +30,9 @@ public class Monster1 : MonoBehaviour
     [SerializeField]
     private Transform target;
 
+    [SerializeField]
+    private int health;
+
 #endregion
 
 #region Unity events
@@ -43,6 +46,9 @@ public class Monster1 : MonoBehaviour
         fsm = new StateMachine<string>();
         fsm.AddState(chasing , new Chasing(this));
         fsm.AddState(death , new Death(this));
+        fsm.AddTransitionFromAny(death , _ => health <= 0);
+        fsm.AddTransition(chasing , death , _ => health > 0);
+        fsm.AddTransition(death , chasing , _ => health > 0);
         fsm.SetStartState(chasing);
         fsm.Init();
     }
@@ -96,6 +102,11 @@ public class Monster1 : MonoBehaviour
         this.facing = facing;
         var facingValue = facing == Facing.Right ? 1 : -1;
         transform.localScale = new Vector3(facingValue , 1 , 1);
+    }
+
+    public void SetHealth(int value)
+    {
+        health = value;
     }
 
     public void SetMoveSpeed(float value)

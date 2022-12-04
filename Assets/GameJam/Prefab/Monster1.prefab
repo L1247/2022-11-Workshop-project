@@ -221,7 +221,7 @@ Transform:
   - {fileID: 8496896086728647327}
   - {fileID: 4642144727705185653}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4642144727707189048
 MonoBehaviour:
@@ -238,3 +238,4 @@ MonoBehaviour:
   animator: {fileID: 4642144727705185651}
   moveSpeed: 2
   target: {fileID: 0}
+  health: 100

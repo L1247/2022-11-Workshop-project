@@ -19,13 +19,13 @@ public class Monster1RuntimeTests
     {
         var monsterPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/GameJam/Prefab/Monster1.prefab");
         var monster       = Object.Instantiate(monsterPrefab).GetComponent<Monster1>();
-        monster.SetPos(new Vector3(5 , 5 , 0));
+        monster.SetPos(new Vector3(1 , 1 , 0));
         var target = Object.Instantiate(monsterPrefab).GetComponent<Monster1>();
         target.SetPos(Vector3.zero);
-        // monster.SetTarget(target.transform);
+        monster.SetTarget(target.transform);
         Assert.IsNotNull(monster);
-        yield return new WaitForSeconds(5);
-        Assert.AreEqual(Vector3.zero , monster.GetPos());
+        yield return new WaitForSeconds(1);
+        Assert.AreEqual(new Vector3(0.05f , 0.05f , 0f) , monster.GetPos());
     }
 
     [UnityTest]
@@ -37,6 +37,19 @@ public class Monster1RuntimeTests
         Assert.AreEqual("Chasing" , monster.GetStateTypeName("Chasing"));
         Assert.AreEqual("Death" , monster.GetStateTypeName("Death"));
         Assert.AreEqual("Chasing" , monster.GetCurrentStateTypeName());
+    }
+
+    [UnityTest]
+    public IEnumerator Transition_To_Death_When_Health_0()
+    {
+        var monsterPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/GameJam/Prefab/Monster1.prefab");
+        var monster       = Object.Instantiate(monsterPrefab).GetComponent<Monster1>();
+
+        monster.SetHealth(0);
+
+        yield return null;
+
+        Assert.AreEqual("Death" , monster.GetCurrentStateTypeName());
     }
 
 #endregion
