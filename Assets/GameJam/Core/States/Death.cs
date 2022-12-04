@@ -6,5 +6,8 @@ using FSM;
 
 namespace GameJam.Core.States
 {
-    public class Death : State<string> { }
+    public class Death : State<string>
+    {
+        
+    }
 }
