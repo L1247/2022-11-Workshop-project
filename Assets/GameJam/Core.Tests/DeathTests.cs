@@ -2,6 +2,7 @@
 
 using GameJam.Core.States;
 using NUnit.Framework;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 #endregion
@@ -12,7 +13,7 @@ public class DeathTests : GGJTests
 #region Setup/Teardown Methods
 
     [SetUp]
-    public void CleanUp()
+    public void Setup()
     {
         foreach (var gameObject in Object.FindObjectsOfType<GameObject>())
             Object.DestroyImmediate(gameObject);
@@ -33,6 +34,22 @@ public class DeathTests : GGJTests
         var monster1s = Object.FindObjectsOfType<Monster1>();
         Assert.AreEqual(1 , monster1s.Length);
         Assert.AreEqual(targetB , monster1s[0]);
+    }
+
+#endregion
+
+#region Public Methods
+
+    [OneTimeSetUp]
+    public void OneTimeSetUp()
+    {
+        EditorSceneManager.OpenScene("Assets/GameJam/TestScene.unity" , OpenSceneMode.Single);
+    }
+
+    [OneTimeTearDown]
+    public void TearDown()
+    {
+        EditorSceneManager.OpenScene("Assets/GameJam/GameJamScene.unity" , OpenSceneMode.Single);
     }
 
 #endregion
